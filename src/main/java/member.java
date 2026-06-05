@@ -13,7 +13,7 @@ public class member extends pengguna {
     private Date tanggalDaftar;
     private String statusAktif;
     private Membership membership;
-    private JadwalList jadwalLatihan;
+    private JadwalLatihan jadwalLatihan;
     
     public member(){ 
 }
@@ -22,5 +22,10 @@ public class member extends pengguna {
         this.nomorMember = nomorMember;
         this.tanggalDaftar= tanggalDaftar;
         this.statusAktif = statusAktif;
+    }
+
+    @Override
+    public String getInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
