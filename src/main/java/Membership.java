@@ -7,6 +7,9 @@
  *
  * @author Lenovo
  */
-class Membership {
+import java.util.Date;
+public class Membership {
+    private String tipe;
+    
     
 }
