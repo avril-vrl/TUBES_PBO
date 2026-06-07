@@ -26,6 +26,6 @@ public class member extends pengguna {
 
     @Override
     public String getInfo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        return "[Member] Nama: " + getNama() + ", No Member: " + nomorMember + ", Status: " + statusAktif;
+}
 }
