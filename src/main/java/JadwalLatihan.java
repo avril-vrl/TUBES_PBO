@@ -74,12 +74,7 @@ class JadwalLatihan {
     }
 
     public String getInfoTrainer() {
-        return trainer != null ? trainer.getNama() : "-";
-    }
+        return null != trainer ? trainer.getNama() : "Tidak ada";
+ }
 
-    void setNamaKelas(String namaKelas) {
-        throw new UnsupportedOperationException("Not supported yet"); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
-
-
