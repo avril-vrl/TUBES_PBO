@@ -13,7 +13,6 @@ public class member extends pengguna {
     private Date tanggalDaftar;
     private String statusAktif;
     private Membership membership;
-    private JadwalLatihan jadwalLatihan;
     
     public member(){ 
 }
@@ -26,6 +25,6 @@ public class member extends pengguna {
 
     @Override
     public String getInfo() {
-        return "[Member] Nama: " + getNama() + ", No Member: " + nomorMember + ", Status: " + statusAktif;
+        return "Member ID: " + getId() + ", Nama: " + getNama() + ", No Member:" + nomorMember;
 }
 }
