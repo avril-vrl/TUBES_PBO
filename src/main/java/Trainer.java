@@ -7,7 +7,7 @@
  *
  * @author Lenovo
  */
-public class Trainer extends pengguna {
+public class Trainer extends Pengguna {
     private String spesialisasi;
     private double gajiPerJam;
     private double rating;

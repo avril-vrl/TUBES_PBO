@@ -65,7 +65,7 @@ class JadwalLatihan {
         this.trainer = trainer; 
     }
 
-    public String tambahPeserta(member member) {
+    public String tambahPeserta(Member member) {
         return "Member " + member.getNama() + " ditambahkan ke kelas " + namaKelas;
     }
 
