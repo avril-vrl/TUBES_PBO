@@ -10,12 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Model.Pembayaran;
 /**
  *
- * @author USER
+ * @    author USER
  */
-public class PembayaranFrame extends javax.swing.JFrame {
-    
+public class PembayaranFrame extends javax.swing.JFrame implements CRUD {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PembayaranFrame.class.getName());
 
     /**
@@ -44,7 +44,8 @@ public class PembayaranFrame extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, e.getMessage());
     }
 }
-    private void tampilData() {
+@Override
+public void tampilData() {
     DefaultTableModel model = new DefaultTableModel();
 
     model.addColumn("ID");
@@ -336,12 +337,18 @@ public class PembayaranFrame extends javax.swing.JFrame {
 
     PreparedStatement pst = conn.prepareStatement(sql);
 
-    pst.setInt(1, idMembership);
-    pst.setDouble(2, Double.parseDouble(jTextField2.getText()));
-    pst.setString(3, jComboBox2.getSelectedItem().toString());
-    pst.setString(4, jTextField3.getText());
-    pst.setString(5, jComboBox3.getSelectedItem().toString());
+    Pembayaran p = new Pembayaran();
 
+    p.setJumlah(Double.parseDouble(jTextField2.getText()));
+    p.setMetodePembayaran(jComboBox2.getSelectedItem().toString());
+    p.setTanggal(jTextField3.getText());
+    p.setStatus(jComboBox3.getSelectedItem().toString());
+
+    pst.setInt(1, idMembership);
+    pst.setDouble(2, p.getJumlah());
+    pst.setString(3, p.getMetodePembayaran());
+    pst.setString(4, p.getTanggal());
+    pst.setString(5, p.getStatus());
     pst.executeUpdate();
 
     JOptionPane.showMessageDialog(this, "Data pembayaran berhasil ditambahkan");
@@ -437,6 +444,20 @@ public class PembayaranFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    @Override
+    public void tambah() {
+    jButton1ActionPerformed(null);
+}
+
+    @Override
+    public void ubah() {
+    jButton2ActionPerformed(null);
+}
+
+    @Override
+    public void hapus() {
+    jButton3ActionPerformed(null);
+}
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

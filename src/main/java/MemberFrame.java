@@ -10,11 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Model.Member;
 /**
  *
  * @author USER
  */
-public class MemberFrame extends javax.swing.JFrame {
+public class MemberFrame extends javax.swing.JFrame implements CRUD {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MemberFrame.class.getName());
 
@@ -284,9 +285,17 @@ public class MemberFrame extends javax.swing.JFrame {
             PreparedStatement.RETURN_GENERATED_KEYS
     );
 
-    pstPengguna.setString(1, jTextField5.getText());
-    pstPengguna.setString(2, jTextField6.getText());
-    pstPengguna.setString(3, jTextField7.getText());
+    Member m = new Member();
+
+    m.setNama(jTextField5.getText());
+    m.setEmail(jTextField6.getText());
+    m.setNoTelp(jTextField7.getText());
+    m.setTanggalDaftar(jTextField8.getText());
+    m.setStatusAktif(jTextField1.getText());
+    
+    pstPengguna.setString(1, m.getNama());
+    pstPengguna.setString(2, m.getEmail());
+    pstPengguna.setString(3, m.getNoTelp());
     pstPengguna.executeUpdate();
 
     ResultSet rsPengguna = pstPengguna.getGeneratedKeys();
@@ -313,8 +322,8 @@ public class MemberFrame extends javax.swing.JFrame {
 
     PreparedStatement pstMember = conn.prepareStatement(sqlMember);
 
-    pstMember.setString(1, jTextField8.getText());
-    pstMember.setString(2, jTextField1.getText());
+    pstMember.setString(1, m.getTanggalDaftar());
+    pstMember.setString(2, m.getStatusAktif());
     pstMember.setInt(3, idPengguna);
     pstMember.setInt(4, idMembership);
 
@@ -400,6 +409,20 @@ public class MemberFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    @Override
+    public void tambah() {
+    jButton1ActionPerformed(null);
+}
+
+    @Override
+    public void ubah() {
+    jButton2ActionPerformed(null);
+}
+
+    @Override
+    public void hapus() {
+    jButton3ActionPerformed(null);
+}
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -474,7 +497,8 @@ public class MemberFrame extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, e.getMessage());
     }
 }
-    private void tampilData() {
+    @Override
+    public void tampilData() {
     DefaultTableModel model = new DefaultTableModel();
 
     model.addColumn("ID");

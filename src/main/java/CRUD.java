@@ -5,11 +5,12 @@
 
 /**
  *
- * @author Lenovo
+ * @author USER
  */
-public interface IPembayaran {
-    String validasi(String data);
-    String konfirmasi(int idPembayaran);
+public interface CRUD {
+    void tambah();
+    void ubah();
+    void hapus();
+    void tampilData();
 }
-
 

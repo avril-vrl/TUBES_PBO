@@ -15,8 +15,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Model.Membership;
 
-public class MembershipFrame extends javax.swing.JFrame {
+public class MembershipFrame extends javax.swing.JFrame implements CRUD {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MembershipFrame.class.getName());
 
@@ -28,8 +29,9 @@ public class MembershipFrame extends javax.swing.JFrame {
         tampilData();
         jTextField1.setEditable(false);
     }
-private void tampilData() {
-
+@Override
+public void tampilData() {
+    
     DefaultTableModel model = new DefaultTableModel();
 
     model.addColumn("ID");
@@ -323,12 +325,19 @@ try {
     Connection conn = Koneksi.getConnection();
     PreparedStatement pst = conn.prepareStatement(sql);
 
-    pst.setString(1, jTextField2.getText());
-    pst.setDouble(2, Double.parseDouble(jTextField3.getText()));
-    pst.setString(3, jTextField4.getText());
-    pst.setString(4, jTextField5.getText());
-    pst.setInt(5, Integer.parseInt(jTextField6.getText()));
+    Membership m = new Membership();
 
+    m.setTipe(jTextField2.getText());
+    m.setHarga(Double.parseDouble(jTextField3.getText()));
+    m.setTanggalMulai(jTextField4.getText());
+    m.setTanggalBerakhir(jTextField5.getText());
+    m.setDurasiHari(Integer.parseInt(jTextField6.getText()));
+
+    pst.setString(1, m.getTipe());
+    pst.setDouble(2, m.getHarga());
+    pst.setString(3, m.getTanggalMulai());
+    pst.setString(4, m.getTanggalBerakhir());
+    pst.setInt(5, m.getDurasiHari());        
     pst.executeUpdate();
 
     JOptionPane.showMessageDialog(this, "Data berhasil ditambahkan");
@@ -442,6 +451,20 @@ try {
     /**
      * @param args the command line arguments
      */
+    @Override
+    public void tambah() {
+    jButton1ActionPerformed(null);
+}
+
+    @Override
+    public void ubah() {
+    jButton2ActionPerformed(null);
+}
+
+    @Override
+    public void hapus() {
+    jButton3ActionPerformed(null);
+}
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

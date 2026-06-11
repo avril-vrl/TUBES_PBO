@@ -10,11 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Model.Trainer;
 /**
  *
  * @author USER
  */
-public class TrainerFrame extends javax.swing.JFrame {
+public class TrainerFrame extends javax.swing.JFrame implements CRUD {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TrainerFrame.class.getName());
 
@@ -26,7 +27,8 @@ public class TrainerFrame extends javax.swing.JFrame {
         tampilData();
         jTextField1.setEditable(false);
 }
-    private void tampilData() {
+    @Override
+    public void tampilData() {
 
     DefaultTableModel model = new DefaultTableModel();
 
@@ -378,10 +380,19 @@ public class TrainerFrame extends javax.swing.JFrame {
                         sqlPengguna,
                         PreparedStatement.RETURN_GENERATED_KEYS
                 );
+        
+        Trainer t = new Trainer();
 
-        pstPengguna.setString(1, jTextField2.getText());
-        pstPengguna.setString(2, jTextField3.getText());
-        pstPengguna.setString(3, jTextField4.getText());
+        t.setNama(jTextField2.getText());
+        t.setEmail(jTextField3.getText());
+        t.setNoTelp(jTextField4.getText());
+        t.setSpesialisasi(jTextField5.getText());
+        t.setGajiPerJam(Double.parseDouble(jTextField6.getText()));
+        t.setRating(Double.parseDouble(jTextField7.getText()));
+
+        pstPengguna.setString(1, t.getNama());
+        pstPengguna.setString(2, t.getEmail());
+        pstPengguna.setString(3, t.getNoTelp());
 
         pstPengguna.executeUpdate();
 
@@ -405,11 +416,9 @@ public class TrainerFrame extends javax.swing.JFrame {
                 conn.prepareStatement(sqlTrainer);
 
         pstTrainer.setInt(1, idPengguna);
-        pstTrainer.setString(2, jTextField5.getText());
-        pstTrainer.setDouble(3,
-                Double.parseDouble(jTextField6.getText()));
-        pstTrainer.setDouble(4,
-                Double.parseDouble(jTextField7.getText()));
+        pstTrainer.setString(2, t.getSpesialisasi());
+        pstTrainer.setDouble(3, t.getGajiPerJam());
+        pstTrainer.setDouble(4, t.getRating());
 
         pstTrainer.executeUpdate();
 
@@ -535,7 +544,7 @@ public class TrainerFrame extends javax.swing.JFrame {
     tampilData();
     resetForm();
 
-} catch (Exception e) {
+} catch (HeadlessException | NumberFormatException | SQLException e) {
 
     JOptionPane.showMessageDialog(
             this,
@@ -565,6 +574,20 @@ public class TrainerFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    @Override
+    public void tambah() {
+    jButton1ActionPerformed(null);
+}
+
+    @Override
+    public void ubah() {
+    jButton2ActionPerformed(null);
+}
+
+    @Override
+    public void hapus() {
+    jButton3ActionPerformed(null);
+}
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
